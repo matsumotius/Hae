@@ -5,7 +5,9 @@
 ```javascript
 var fly = $(foobar).fly();
 ```
+
 or
+
 ```javascript
 var fly = $(foobar).hae();
 ```
