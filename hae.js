@@ -2,6 +2,9 @@
   var util = {
     distance : function(v){
       return Math.floor(Math.random() * v * 2) - v;
+    },
+    random   : function(v){
+      return Math.floor(Math.random() * v);
     }
   };
   var Uzi = function(ground){
@@ -13,12 +16,18 @@
     this.duration = 30;
     this.target.css("position", "absolute");
     this.fxcked   = false;
+    this.is_dead  = false;
+  };
+  Hae.prototype.die = function(){
+    this.is_dead = true;
   };
   Hae.prototype.action = function(){
     this.fly();
   };
   Hae.prototype.stop = function(){
-    // todo
+    var that = this;
+    var stop_time = util.random(3000);
+    setTimeout(function(){ that.action(); }, stop_time);
   };
   Hae.prototype.walk = function(){
     // todo
@@ -43,9 +52,7 @@
     this.target.animate(dest, {
       duration : that.duration,
       easing   : "swing",
-      complete : function(){
-        setTimeout(function(){ that.action(); }, that.duration * 2);
-      }
+      complete : function(){ that.action(); }
     });
   };
   $.fn.hae = $.fn.fly = function(option){
